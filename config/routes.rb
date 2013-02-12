@@ -1,4 +1,17 @@
 Greissue::Application.routes.draw do
+  resources :instructions do
+    collection {post :import }
+  end
+
+  resources :topics do
+    collection {post :import }
+  end
+
+
+  devise_for :users
+
+  root :to => 'topics#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+  <b>Issue statement:</b>
+<div class="content">
+  <%= simple_format @topic.issue_statement.html_safe %>
+</div>
+
+<% if @topic.instruction %>
+<div class="instruction">
+  <%= @topic.instruction.content %>
+</div>
+<% end %>
+
+<%= link_to 'Edit', edit_topic_path(@topic) %> |
+<%= link_to 'Back', topics_path %>

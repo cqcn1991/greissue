@@ -1,0 +1,14 @@
+<% @instructions.each do |instruction| %>
+ <div class="instruction">
+   <%= instruction.id %>
+   <%= simple_format instruction.content %>
+ </div>
+
+<% end %>
+
+
+<h2>Import Instructions</h2>
+<%= form_tag import_instructions_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import" %>
+<% end %>
