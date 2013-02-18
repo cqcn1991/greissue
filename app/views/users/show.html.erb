@@ -1,0 +1,5 @@
+<%= @user.name %>
+<% @thoughts.each do |thought| %>
+    <%= thought.topic.issue_statement %>
+    <%= thought.content %>
+<% end %>

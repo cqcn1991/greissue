@@ -1,16 +1,39 @@
 Greissue::Application.routes.draw do
+
+  resources :topic_groups do
+    collection {post :import }
+  end
+
+  devise_for :users  do
+    resources :thoughts
+  end
+  resources :users, only: [:show]
+
+  resources :group_relationships, only: [:create, :destroy]  do
+    collection {post :import }
+  end
+
+  resources :categories
+
+
   resources :instructions do
     collection {post :import }
   end
 
+  resources :thoughts
+
   resources :topics do
-    collection {post :import }
+    collection do
+      post :import
+      #get :autocomplete_tag_name
+    end
+    resources :thoughts
   end
 
-
-  devise_for :users
+  get 'tags/:tag', to: 'topics#index', as: :tag
 
   root :to => 'topics#index'
+  match 'nav' => 'static_pages#navigation'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

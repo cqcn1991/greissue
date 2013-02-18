@@ -1,6 +1,9 @@
 <%= simple_form_for @topic do |f| %>
     <%= f.input :issue_statement, as: :text %>
     <!--article栏为true-->
+    <% if user_signed_in? %>
+    <%= f.input :tag_list, as: :text, label: 'Tags (separated by commas)' %>
+    <% end %>
 
     <%= f.button :submit %>
 <% end %>

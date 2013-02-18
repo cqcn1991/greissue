@@ -8,6 +8,8 @@ gem 'cancan'
 gem 'rolify'
 gem 'kaminari'
 gem 'acts-as-taggable-on'
+gem 'rails3-jquery-autocomplete'
+#gem 'omniauth-twitter'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

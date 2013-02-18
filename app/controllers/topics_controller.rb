@@ -1,8 +1,13 @@
 class TopicsController < ApplicationController
+  autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag'
   # GET /topics
   # GET /topics.json
   def index
-    @topics = Topic.all
+    if params[:tag]
+      @topics = Topic.tagged_with(params[:tag])
+    else
+      @topics = Topic.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +19,20 @@ class TopicsController < ApplicationController
   # GET /topics/1.json
   def show
     @topic = Topic.find(params[:id])
+    @topics = Topic.joins(:group_relationships).
+        where(:group_relationships => {:topic_group_id => @topic.group_relationships.pluck(:topic_group_id) }).
+        uniq.where("group_relationships.topic_id != ?", @topic.id).order("sequ ASC")
+    if  @topic.topic_groups.count == 0
+      @thoughts=@topic.thoughts
+    else
+      @groups= @topic.topic_groups
+      @thoughts=Thought.joins(:topic => :group_relationships).
+          where(:group_relationships => {:topic_group_id => @topic.group_relationships.pluck(:topic_group_id) }).
+          uniq
+    end
+    @thought=Thought.new
+
+
 
     respond_to do |format|
       format.html # show.html.erb
@@ -57,6 +76,11 @@ class TopicsController < ApplicationController
   # PUT /topics/1.json
   def update
     @topic = Topic.find(params[:id])
+    if user_signed_in?
+      @user= current_user
+      @tag_list=params[:topic][:tag_list]
+      @user.tag(@topic, :with => @tag_list, :on => :issue_statement )
+    end
 
     respond_to do |format|
       if @topic.update_attributes(params[:topic])
@@ -87,6 +111,7 @@ class TopicsController < ApplicationController
     Topic.import(params[:file])
     redirect_to root_url, notice: "Products imported."
   end
+
 
 
 end

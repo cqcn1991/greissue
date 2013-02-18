@@ -1,0 +1,6 @@
+<%= simple_form_for @topic_group do |f| %>
+    <%= f.input :title %>
+    <%= f.input :description %>
+    <%= f.association :topics, :as => :check_boxes   %>
+    <%= f.button :submit %>
+<% end %>

@@ -1,15 +1,67 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="span8 offset2">
+    <div class="topic">
+      <h1>Issue <%= @topic.sequ %></h1>
+    </div>
 
-  <b>Issue statement:</b>
-<div class="content">
-  <%= simple_format @topic.issue_statement.html_safe %>
+    <div class="content">
+      <%= simple_format @topic.issue_statement.html_safe %>
+    </div>
+
+    <div class="instruction">
+      <%= @topic.instruction.content %>
+    </div>
+
+    <div class="Groups">
+      <h3>Related Topics <%= @topic.topic_groups.count if Rails.env.development? %></h3>
+      <%= render :partial => "topic_groups/group", :collection => @groups %>
+    </div>
+
+
+    <div class="Thoughts">
+      <h3>Thoughts</h3>
+      <% @thoughts.each do |thought| %>
+          <div class="Thought">
+            <div class="pull-right">
+              <%= link_to "Edit", edit_thought_path(thought) %>
+            </div>
+            <div class="author">
+              <%= link_to thought.user.name, thought.user %>
+            </div>
+
+            <div class="content">
+              <%= simple_format thought.content %>
+            </div>
+
+          </div>
+      <% end %>
+
+      <% if user_signed_in? %>
+          <%= render "thoughts/form" %>
+      <% else %>
+          <h3>loggin to present your thoughts</h3>
+      <% end %>
+    </div>
+
+
+
+
+    <!--<p>Tags: -->
+      <!--<#%= raw @topic.tag_list.map {  |t| link_to t, tag_path(t)     }.join(', ') %>-->
+    <!--</p>-->
+
+
+
+
+    <%= link_to 'Edit', edit_topic_path(@topic) %> |
+    <%= link_to 'Back', topics_path %>
+
+
+  </div>
+
 </div>
 
-<% if @topic.instruction %>
-<div class="instruction">
-  <%= @topic.instruction.content %>
-</div>
-<% end %>
 
-<%= link_to 'Edit', edit_topic_path(@topic) %> |
-<%= link_to 'Back', topics_path %>
+
+
+

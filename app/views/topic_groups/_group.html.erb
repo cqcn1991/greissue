@@ -1,0 +1,11 @@
+<table class="group table">
+  <% group.topics.each do |topic| %>
+      <tr>
+        <% if topic.sequ != @topic.sequ  %>
+        <td><%= topic.sequ %></td>
+        <td><%= topic.issue_statement %></td>
+        <% end %>
+      </tr>
+  <% end %>
+</table>
+

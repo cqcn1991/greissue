@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  acts_as_tagger
+  has_many :thoughts
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable

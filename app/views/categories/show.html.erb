@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<%= @category.name %>
+<%= @category.description %>
+<% @topics.each do |topic| %>
+    <%= topic.issue_statement %>
+    <%= topic.topic.instruction.content %>
+<% end %>
+
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>

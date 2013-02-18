@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+<%= @topic_group.title %>
+
+<h3>Topics</h3>
+<% @topic_group.topics.each do |topic| %>
+    <div class="topic">
+      <%= topic.issue_statement %>
+    </div>
+
+<% end %>
+
+<%= link_to 'Edit', edit_topic_group_path(@topic_group) %> |
+<%= link_to 'Back', topic_groups_path %>

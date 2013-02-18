@@ -1,0 +1,29 @@
+<h1>Listing topic_groups</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @topic_groups.each do |topic_group| %>
+  <tr>
+    <td><%= topic_group.title %></td>
+    <td><%= link_to 'Show', topic_group %></td>
+    <td><%= link_to 'Edit', edit_topic_group_path(topic_group) %></td>
+    <td><%= link_to 'Destroy', topic_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<h2>Import Topics</h2>
+<%= form_tag import_topics_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import" %>
+<% end %>
+
+
+<%= link_to 'New Topic group', new_topic_group_path %>
