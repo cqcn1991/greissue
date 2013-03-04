@@ -1,13 +1,16 @@
 Greissue::Application.routes.draw do
 
-  resources :topic_groups do
-    collection {post :import }
-  end
-
   devise_for :users  do
     resources :thoughts
   end
   resources :users, only: [:show]
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
+  resources :topic_groups do
+    collection {post :import }
+  end
+
+
 
   resources :group_relationships, only: [:create, :destroy]  do
     collection {post :import }
@@ -27,13 +30,18 @@ Greissue::Application.routes.draw do
       post :import
       #get :autocomplete_tag_name
     end
-    resources :thoughts
+    resources :thoughts do
+      member { post :vote }
+    end
   end
+
+
 
   get 'tags/:tag', to: 'topics#index', as: :tag
 
   root :to => 'topics#index'
   match 'nav' => 'static_pages#navigation'
+  match 'import' => 'static_pages#import'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

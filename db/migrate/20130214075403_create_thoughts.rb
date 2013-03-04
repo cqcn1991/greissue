@@ -7,5 +7,7 @@ class CreateThoughts < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :thoughts, :user_id
+    add_index :thoughts, :topic_id
   end
 end

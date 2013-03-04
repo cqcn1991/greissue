@@ -1,0 +1,38 @@
+<div class="navbar">
+  <div class="navbar-inner">
+    <%= link_to "Issue Thoughts", root_path, class: "brand" %>
+    <ul class="nav">
+      <!--<li class="active"><a href="#">Home</a></li>-->
+      <li><%= link_to "Issue", topics_path %></li>
+      <li><%= link_to "Thought", thoughts_path %></li>
+      <!--<li><a href="#">Link</a></li>-->
+    </ul>
+    <ul class="nav pull-right">
+      <!--<form class="navbar-search pull-left" action="">-->
+        <!--<input class="search-query span2" type="text" placeholder="Search">-->
+      <!--</form>-->
+
+
+        <% if user_signed_in? %>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <%= current_user.name %>
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                  <li><%= link_to "My Thoughts", current_user %>      </li>
+                  <li><%= link_to "Profile", edit_user_registration_path %>      </li>
+                  <li class="divider"></li>
+                  <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+              </ul>
+            </li>
+        <% else %>
+            <li><%= link_to 'Sign up', new_user_registration_path %> </li>
+            <li><%= link_to 'Sign in',new_user_session_path %></li>
+        <% end %>
+
+
+
+    </ul>
+  </div>
+</div>

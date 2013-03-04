@@ -9,6 +9,11 @@ gem 'rolify'
 gem 'kaminari'
 gem 'acts-as-taggable-on'
 gem 'rails3-jquery-autocomplete'
+gem 'activerecord-reputation-system'
+gem 'rails_admin'
+gem 'sunspot_rails'
+
+
 #gem 'omniauth-twitter'
 
 # Bundle edge Rails instead:
@@ -17,6 +22,7 @@ gem 'rails3-jquery-autocomplete'
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails', '2.11.0'
+  gem 'sunspot_solr'
 end
 
 group :production do

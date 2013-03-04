@@ -1,0 +1,24 @@
+
+<h2>Import Topics</h2>
+<%= form_tag import_topics_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import" %>
+<% end %>
+
+<h2>Import Instructions</h2>
+<%= form_tag import_instructions_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import" %>
+<% end %>
+
+<h2>Import Topics Groups</h2>
+<%= form_tag import_topic_groups_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import" %>
+<% end %>
+
+<h2>Import  Group Relationships</h2>
+<%= form_tag import_group_relationships_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import" %>
+<% end %>

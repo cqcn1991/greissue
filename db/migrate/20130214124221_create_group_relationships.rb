@@ -6,7 +6,8 @@ class CreateGroupRelationships < ActiveRecord::Migration
 
       t.timestamps
     end
-
+    add_index :group_relationships,  :topic_group_id
+    add_index :group_relationships,  :topic_id
     add_index :group_relationships, [:topic_id, :topic_group_id], unique: true
   end
 end

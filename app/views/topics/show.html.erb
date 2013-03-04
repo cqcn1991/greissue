@@ -13,24 +13,32 @@
     </div>
 
     <div class="Groups">
-      <h3>Related Topics <%= @topic.topic_groups.count if Rails.env.development? %></h3>
+      <h3>Related Topics <%= @topic.topic_groups.count if Rails.env.development? %>(From all related topics)</h3>
       <%= render :partial => "topic_groups/group", :collection => @groups %>
     </div>
-
 
     <div class="Thoughts">
       <h3>Thoughts</h3>
       <% @thoughts.each do |thought| %>
           <div class="Thought">
-            <div class="pull-right">
-              <%= link_to "Edit", edit_thought_path(thought) %>
-            </div>
+            <% if current_user == thought.user  %>
+                <div class="pull-right">
+                  <%= link_to "Edit", edit_thought_path(thought) %>
+                </div>
+            <% end %>
             <div class="author">
               <%= link_to thought.user.name, thought.user %>
+              <%= thought.created_at.strftime("%Y-%m-%d %H:%M") %>
             </div>
 
             <div class="content">
               <%= simple_format thought.content %>
+            </div>
+
+            <div class="voting">
+              <%= link_to "up", vote_topic_thought_path(thought.topic, thought, type: "up"), method: "post" %>
+              <%= thought.reputation_for(:votes).to_i  %>
+              <%= link_to "down", vote_topic_thought_path(thought.topic, thought, type: "down"), method: "post" %>
             </div>
 
           </div>
@@ -42,6 +50,13 @@
           <h3>loggin to present your thoughts</h3>
       <% end %>
     </div>
+  </div>
+
+
+
+
+
+
 
 
 
@@ -53,11 +68,11 @@
 
 
 
-    <%= link_to 'Edit', edit_topic_path(@topic) %> |
-    <%= link_to 'Back', topics_path %>
+    <%#= link_to 'Edit', edit_topic_path(@topic) %>
+    <%#= link_to 'Back', topics_path %>
 
 
-  </div>
+
 
 </div>
 

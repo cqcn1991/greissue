@@ -3,9 +3,13 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.json
   def index
+    #@search = Topic.search do
+    #  fulltext params[:search]
+    #end
     if params[:tag]
       @topics = Topic.tagged_with(params[:tag])
     else
+      #@topics = @search.results
       @topics = Topic.all
     end
 
@@ -23,12 +27,12 @@ class TopicsController < ApplicationController
         where(:group_relationships => {:topic_group_id => @topic.group_relationships.pluck(:topic_group_id) }).
         uniq.where("group_relationships.topic_id != ?", @topic.id).order("sequ ASC")
     if  @topic.topic_groups.count == 0
-      @thoughts=@topic.thoughts
+      @thoughts=@topic.thoughts.find_with_reputation(:votes, :all, order: 'votes desc')
     else
       @groups= @topic.topic_groups
       @thoughts=Thought.joins(:topic => :group_relationships).
           where(:group_relationships => {:topic_group_id => @topic.group_relationships.pluck(:topic_group_id) }).
-          uniq
+          uniq.find_with_reputation(:votes, :all, order: 'votes desc')
     end
     @thought=Thought.new
 

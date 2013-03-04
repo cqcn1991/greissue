@@ -6,4 +6,9 @@ class Thought < ActiveRecord::Base
 
   validates_presence_of :content, :topic_id
 
+  has_reputation :votes,
+                 source: :user,
+                 aggregated_by: :sum
+
+
 end
