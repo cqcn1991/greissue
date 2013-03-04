@@ -10,7 +10,6 @@ gem 'kaminari'
 gem 'acts-as-taggable-on'
 gem 'rails3-jquery-autocomplete'
 gem 'activerecord-reputation-system'
-gem 'rails_admin'
 gem 'sunspot_rails'
 
 

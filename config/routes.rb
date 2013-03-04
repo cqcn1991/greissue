@@ -4,8 +4,6 @@ Greissue::Application.routes.draw do
     resources :thoughts
   end
   resources :users, only: [:show]
-  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
-
   resources :topic_groups do
     collection {post :import }
   end
