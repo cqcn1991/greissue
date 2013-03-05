@@ -11,16 +11,16 @@ class Topic < ActiveRecord::Base
   default_scope order: 'topics.sequ ASC'
   validates :issue_statement, presence: true
 
-  searchable do
-    text :issue_statement
-    integer :sequ
-    text :thoughts do
-      thoughts.map(&:content)
-    end
-    #text :instruction do
-    #  instructions.map(&:content)
-    #end
-  end
+  #searchable do
+  #  text :issue_statement
+  #  integer :sequ
+  #  text :thoughts do
+  #    thoughts.map(&:content)
+  #  end
+  #  #text :instruction do
+  #  #  instructions.map(&:content)
+  #  #end
+  #end
 
 
   def self.import(file)
