@@ -26,7 +26,7 @@ class Topic < ActiveRecord::Base
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
       topic = find_by_id(row["id"]) || new
-      topic.attributes = row.to_hash
+      topic.attributes = row.to_hash.slice(*accessible_attributes)
       topic.save!
     end
   end
