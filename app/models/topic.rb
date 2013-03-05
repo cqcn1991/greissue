@@ -17,9 +17,9 @@ class Topic < ActiveRecord::Base
     text :thoughts do
       thoughts.map(&:content)
     end
-    text :instruction do
-      instructions.map(&:content)
-    end
+    #text :instruction do
+    #  instructions.map(&:content)
+    #end
   end
 
 
@@ -30,6 +30,9 @@ class Topic < ActiveRecord::Base
       topic.save!
     end
   end
+
+
+
 
   def to_label
 

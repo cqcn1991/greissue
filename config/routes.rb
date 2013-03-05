@@ -8,8 +8,6 @@ Greissue::Application.routes.draw do
     collection {post :import }
   end
 
-
-
   resources :group_relationships, only: [:create, :destroy]  do
     collection {post :import }
   end
