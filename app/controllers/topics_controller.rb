@@ -6,12 +6,12 @@ class TopicsController < ApplicationController
     #@search = Topic.search do
     #  fulltext params[:search]
     #end
-    if params[:tag]
-      @topics = Topic.tagged_with(params[:tag])
-    else
+    #if params[:tag]
+    #  @topics = Topic.tagged_with(params[:tag])
+    #else
       #@topics = @search.results
       @topics = Topic.all
-    end
+    #end
 
     respond_to do |format|
       format.html # index.html.erb
